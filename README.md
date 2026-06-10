@@ -41,7 +41,8 @@ $ npm run dev
 │   ├── config/             # Application configuration
 │   ├── http/               # HTTP clients, interceptors, and API setup
 │   └── services/           # Global services
-│
+         └── public/        # Public API
+│        └── app/           # API With token
 ├── features/               # Feature-based modules
 │   ├── auth/
 │   │   ├── login/
