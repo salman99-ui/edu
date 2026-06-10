@@ -106,12 +106,10 @@ RTK Query provides a modern and efficient approach to managing remote data by re
 5. Scalability Centralizes API definitions, making it easier to maintain and scale as the application grows.
 
 
-### Strategi Keamanan 
+Security Strategy
+Currently, authentication tokens are stored in localStorage as a simpler approach for applications. These reasons include:
 
-Saat ini token autentikasi disimpan di localStorage sebagai pendekatan sederhana pada aplikasi dengan alasan :
-1. Implementasi lebih sederhana
-2. Mudah diakses
+1. Simpler implementation
+2 Easier access
 
-cara lebih baik adalah dengan menaruh di dalam cookie dengan httponly atau dengan teknik refresh token 
-Access Token Disimpan di HTTP-only cookie untuk mendapatkan access token baru tanpa login ulang
-
+A better approach is to store them in an http-only cookie or use the refresh token technique. Access tokens are stored in an HTTP-only cookie to obtain a new access token without re-logging in.
