@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+### Technical Documentation
+
+- [Installing](#installing)
+- [Build](#build)
+- [Branch](#branch)
+
+### Installing
+
+to be able to run this project, you must [install nodejs](https://nodejs.org/en/).
+
+check installation nodejs :
+
+1. open terminal
+2. run `node --version` to check your nodejs version, **recomended version `v20.19.5`**.
+
+Running Apps :
+1. open directory project on terminal.
+2. In the project directory, you can run `npm install` to install dependencies.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+$ npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. then run `npm run dev` to run app in development mode.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+$ npm run dev
+```
+# Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```text
+.
+├── app/                    # Application entry point and route groups
+│   ├── (auth)/             # Authentication routes
+│   ├── (dashboard)/        # Dashboard routes
+│   └── api/                # API route handlers
+│
+├── core/                   # Core application modules and services
+│   ├── config/             # Application configuration
+│   ├── http/               # HTTP clients, interceptors, and API setup
+│   └── services/           # Global services
+│
+├── features/               # Feature-based modules
+│   ├── auth/
+│   │   ├── login/
+│   │   │   ├── hook/       # Custom hooks and state management
+│   │   │   └── validation/ # Form validation schemas and logic
+│   │   └── ...
+│   │
+│   └── dashboard/
+│       └── dashboard/
+│           ├── components/   # Feature-specific components
+│           ├── hook/         # Custom hooks and business logic
+│           ├── validation/   # Validation schemas and rules
+│           └── presentation/ # UI presentation layer
+│
+├── shared/                 # Shared resources used across features
+│   ├── components/         # Reusable UI components
+│   ├── constants/          # Application constants
+│   ├── context/            # Shared contexts/providers
+│   ├── guards/             # Route guards and authorization logic
+│   └── helpers/            # Utility and helper functions
+│
+└── public/
+    └── assets/            # Static assets (images, icons, fonts, etc.)
+```
 
-## Learn More
+## Folder Responsibilities
 
-To learn more about Next.js, take a look at the following resources:
+### app
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Contains application-level routing, layouts, and route groups such as authentication and dashboard modules.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### core
 
-## Deploy on Vercel
+Houses core functionality shared throughout the application, including configuration, HTTP setup, and global services.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Organized by business domain or feature. Each feature contains its own components, hooks, validations, presentation logic, and related files to maintain modularity and scalability.
+
+### shared
+
+Contains reusable resources that can be used by multiple features, including UI components, utilities, constants, guards, and shared contexts.
+
+### public
+
+Stores static assets that are publicly accessible, such as images, fonts, and icons.
+
+------------------------------------------------------------------------------------------------------
+
+## State Management
+
+This project uses Redux Toolkit Query (RTK Query) as the primary solution for API communication.
+
+### Why RTK Query?
+
+RTK Query provides a modern and efficient approach to managing remote data by reducing boilerplate and simplifying API integration.
+
+1. Responses are cached automatically, reducing unnecessary network requests and improving application performance.
+2. Built-in Loading and Error States Provides standardized loading, success, and error states without requiring additional reducers or actions.
+3. Reduced Boilerplate Eliminates the need to manually create actions, reducers, thunks, and selectors for API requests.
+4. TypeScript Support Offers excellent TypeScript integration for strongly typed API requests and responses.
+5. Scalability Centralizes API definitions, making it easier to maintain and scale as the application grows.
+
+
+### Strategi Keamanan 
+
+Saat ini token autentikasi disimpan di localStorage sebagai pendekatan sederhana pada aplikasi dengan alasan :
+1. Implementasi lebih sederhana
+2. Mudah diakses
+
+cara lebih baik adalah dengan menaruh di dalam cookie dengan httponly atau dengan teknik refresh token 
+Access Token Disimpan di HTTP-only cookie untuk mendapatkan access token baru tanpa login ulang
+
