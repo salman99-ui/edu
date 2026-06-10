@@ -1,0 +1,1 @@
+type ChangeInputKey = "search" | "category";

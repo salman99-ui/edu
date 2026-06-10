@@ -1,0 +1,1 @@
+type MenuState = "dashboard" | "course" | "profile"

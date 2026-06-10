@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-sans: var(--font-poppins);
 }
 
 @theme inline {
@@ -10,6 +11,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-primary: #2e90fa;
+  --color-black: #101828;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +22,134 @@
   }
 }
 
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), sans-serif;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+input[type="checkbox"] {
+  accent-color: #2e90fa;
+}
+
+.text-primary {
+  color: #2e90fa;
+}
+
+.text-FC {
+  color: #fcfcfd;
+}
+
+.text-SC {
+  color: #101828;
+}
+
+.text-disabled {
+  color: #98a2b3;
+}
+
+.button-primary {
+  background-color: #2e90fa;
+}
+
+.loader {
+  width: 30px;
+  aspect-ratio: 1;
+  display: grid;
+  border-radius: 50%;
+  background:
+    linear-gradient(
+        0deg,
+        rgb(255 255 255/50%) 30%,
+        #0000 0 70%,
+        rgb(255 255 255/100%) 0
+      )
+      50%/8% 100%,
+    linear-gradient(
+        90deg,
+        rgb(255 255 255/25%) 30%,
+        #0000 0 70%,
+        rgb(255 255 255/75%) 0
+      )
+      50%/100% 8%;
+  background-repeat: no-repeat;
+  animation: l23 1s infinite steps(12);
+}
+.loader::before,
+.loader::after {
+  content: "";
+  grid-area: 1/1;
+  border-radius: 50%;
+  background: inherit;
+  opacity: 0.915;
+  transform: rotate(30deg);
+}
+.loader::after {
+  opacity: 0.83;
+  transform: rotate(60deg);
+}
+@keyframes l23 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+.skeleton {
+  animation: skeleton-animation 1s linear infinite alternate;
+}
+
+@keyframes skeleton-animation {
+  0% {
+    background-color: hsl(200, 20%, 80%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  background: #ccc;
+  border-radius: 9999px;
+  transition: 0.3s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: 3px;
+  top: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+input:checked + .slider {
+  background: #ef4444; /* red */
+}
+
+input:checked + .slider::before {
+  transform: translateX(22px);
 }
